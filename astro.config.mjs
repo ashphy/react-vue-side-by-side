@@ -8,6 +8,9 @@ import vue from '@astrojs/vue';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  site: 'https://ashphy.github.io',
+  base: 'react-vue-side-by-side',
+
   vite: {
     plugins: [tailwindcss()]
   },
