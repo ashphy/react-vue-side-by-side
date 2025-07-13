@@ -1,0 +1,20 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { ParentReact } from "./parent-react";
+import ParentVue from "./parent-vue.vue";
+---
+
+<Layout>
+  <main>
+    <h1 class="text-5xl mb-6">Re-Render Sample</h1>
+    <section class="mb-8">
+      <h2 class="text-3xl mb-4">React</h2>
+      <ParentReact client:load />
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-3xl mb-4">Vue.js</h2>
+      <ParentVue client:load />
+    </section>
+  </main>
+</Layout>

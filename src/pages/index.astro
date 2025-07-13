@@ -1,11 +1,29 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<Welcome />
+  <h1></h1>
+  <h1 class="text-5xl mb-6">Vue.jsからはじめるReact</h1>
+
+  <div class="text-lg mb-12">
+    <a class="underline" href="/rerender">1. Re-Render Sample</a>
+  </div>
+
+  <section>
+    <h2 class="text-2xl mb-2">Dev Tools</h2>
+    <div>
+      <a class="underline" href="https://react-scan.com/" target="_blank"
+        >React Scan</a
+      >
+    </div>
+
+    <div>
+      <a
+        class="underline"
+        href="https://devtools-next.vuejs.org/"
+        target="_blank">Vue DevTools</a
+      >
+    </div>
+  </section>
 </Layout>
