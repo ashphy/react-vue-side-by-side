@@ -1,7 +1,9 @@
 ---
+import { Code } from "astro:components";
 import Layout from "../../layouts/Layout.astro";
 import { ParentReact } from "./parent-react";
 import ParentVue from "./parent-vue.vue";
+import dedent from "dedent";
 ---
 
 <Layout>
@@ -10,11 +12,92 @@ import ParentVue from "./parent-vue.vue";
     <section class="mb-8">
       <h2 class="text-3xl mb-4">React</h2>
       <ParentReact client:load />
+      <div class="flex gap-2 p-4">
+        <Code
+          class="flex-1"
+          code={dedent`export const ParentReact = () => {
+            const [count, setCount] = useState(0);
+            
+            const increment = () => {
+              setCount((prev) => prev + 1);
+            };
+
+            return (
+              <div>
+                <h3>親コンポーネント</h3>
+                <div>
+                  <button onClick={increment}>
+                    Increment
+                  </button>
+                  Count: {count}
+                </div>
+                <ChildReact />
+              </div>
+            );
+          };`}
+          lang="tsx"
+          theme="github-light"
+        />
+        <Code
+          class="flex-1"
+          code={dedent`export const ChildReact = () => {
+            return (
+              <div>
+                子コンポーネント
+              </div>
+            );
+          };`}
+          lang="tsx"
+          theme="github-light"
+        />
+      </div>
     </section>
 
     <section class="mb-8">
       <h2 class="text-3xl mb-4">Vue.js</h2>
       <ParentVue client:load />
+      <div class="flex gap-2 p-4">
+        <Code
+          class="flex-1"
+          code={dedent`<script setup>
+            import { ref } from "vue";
+            import ChildVue from "./child-vue.vue";
+
+            const count = ref(0);
+
+            const increment = () => {
+              count.value++;
+            };
+          </script>
+
+          <template>
+            <div>
+              <h3>親コンポーネント</h3>
+
+              <div>
+                <button @click="increment">
+                  Increment
+                </button>
+                Count: {{ count }}
+              </div>
+
+              <ChildVue />
+            </div>
+          </template>`}
+          lang="vue"
+          theme="github-light"
+        />
+        <Code
+          class="flex-1"
+          code={dedent`<template>
+            <div>
+              子コンポーネント
+            </div>
+          </template>`}
+          lang="tsx"
+          theme="github-light"
+        />
+      </div>
     </section>
   </main>
 </Layout>
