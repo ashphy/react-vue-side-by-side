@@ -20,4 +20,10 @@ export default defineConfig({
   devToolbar: {
     enabled: false
   },
+
+  markdown: {
+    shikiConfig: {
+      theme: 'github-light',
+    },
+  },
 });

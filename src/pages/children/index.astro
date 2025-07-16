@@ -1,0 +1,91 @@
+---
+import { Code } from "astro/components";
+import Layout from "../../layouts/Layout.astro";
+import { Container } from "./container";
+import { ContainerWithChild } from "./render-as-children";
+import dedent from "dedent";
+---
+
+<Layout>
+  <main>
+    <h1 class="text-5xl mb-6">Render-as-children Sample</h1>
+    <section class="mb-8">
+      <h2 class="text-3xl mb-4">
+        Child Componentを一緒にレンダリングするパターン
+      </h2>
+      <Container client:load />
+
+      <Code
+        lang="tsx"
+        theme="github-light"
+        code={dedent`import { useState } from "react";
+
+          const Child = () => {
+            return <div>Child Component</div>;
+          };
+
+          export const Container = () => {
+            const [open, setOpen] = useState(false);
+            return (
+              <div>
+                <div>
+                  <button onClick={() => setOpen(!open)}>
+                    {open ? "Close" : "Open"}
+                  </button>
+
+                  {open && <div>ここにメニューが表示されます</div>}
+                </div>
+
+                <div>
+                  <div>
+                    <Child />
+                  </div>
+                </div>
+              </div>
+            );
+          };`}
+      />
+    </section>
+
+    <section class="mb-8">
+      <h2 class="text-3xl mb-4">Child Componentをpropsで渡すパターン</h2>
+      <ContainerWithChild client:load />
+      <Code
+        lang="tsx"
+        theme="github-light"
+        code={dedent`import { useState } from "react";
+
+          const Child = () => {
+            return <div>Child Component</div>;
+          };
+
+          interface ContainerProps {
+            children: React.ReactNode;
+          }
+
+          const Container = ({ children }: ContainerProps) => {
+            const [open, setOpen] = useState(false);
+            return (
+              <div>
+                <div>
+                  <button onClick={() => setOpen(!open)}>
+                    {open ? "Close" : "Open"}
+                  </button>
+                  {open && <div>ここにメニューが表示されます</div>}
+                </div>
+                <div>{children}</div>
+              </div>
+            );
+          };
+
+          export const ContainerWithChild = () => {
+            return (
+              <Container>
+                <Child />
+              </Container>
+            );
+          };`}
+      />
+    </section>
+  </main>
+</Layout>
